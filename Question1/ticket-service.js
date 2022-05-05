@@ -1,7 +1,5 @@
 const calculateTotal = (items) => {
-    return items
-        .map(item => item.quantity*item.unitPrice)
-        .reduce((sum,a)=> sum+a,0);
+    return items.reduce((sum,item)=> sum+(item.quantity*item.unitPrice),0);
 }
 
 const printTicket = (items) => {
