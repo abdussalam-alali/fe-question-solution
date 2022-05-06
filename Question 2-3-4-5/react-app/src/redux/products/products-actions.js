@@ -4,10 +4,7 @@ export const addToProducts = (item) => {
     return {
         type: actionTypes.ADD_PRODUCT,
         payload: {
-            product: item.product,
-            quantity: item.quantity,
-            unitPrice: item.unitPrice,
-            type: item.type,
+            item
         }
     }
 }

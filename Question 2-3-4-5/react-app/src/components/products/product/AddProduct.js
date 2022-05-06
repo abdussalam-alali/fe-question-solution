@@ -1,8 +1,10 @@
 import React,{useState} from 'react';
-import {Button, FormControl, InputLabel, Modal, Select, Slide, Slider, TextField, Typography} from "@mui/material";
+import {Button, Modal, TextField } from "@mui/material";
 import Box from "@mui/material/Box";
 import MenuItem from "@mui/material/MenuItem";
 import SaveIcon from '@mui/icons-material/Save';
+import { connect } from 'react-redux';
+import { addToProducts } from "../../../redux/products/products-actions";
 
 const style = {
     position: 'absolute',
@@ -16,9 +18,23 @@ const style = {
     borderRadius: '5px'
 };
 
-const AddProduct = () => {
+const AddProduct = ( {addProduct}) => {
     const [open,setOpen] = useState(false);
+    const [formData,setFormData] = useState({
+        product: '',
+        quantity: 0,
+        unitPrice: 0,
+        type: 'Drinks',
+    });
 
+    const handleSave = () => {
+        addProduct(formData);
+        setOpen(false);
+    }
+    const handleChange = (e) => {
+        setFormData({...formData, [e.target.name]: e.target.value})
+        console.log(formData);
+    }
     return (
         <>
             <Modal
@@ -37,8 +53,10 @@ const AddProduct = () => {
                     <TextField
                         required
                         color='secondary'
-                        onChange={(e)=> console.log(e.target.value)}
+                        name='product'
+                        onChange={(e)=> handleChange(e)}
                         id="outlined-required"
+                        value={formData.product}
                         label="Name"
                         defaultValue="Hello World"
                         helperText='Please enter the product name'
@@ -46,9 +64,11 @@ const AddProduct = () => {
                     <TextField
                         required
                         color='secondary'
-                        onChange={(e)=> console.log(e.target.value)}
+                        name='quantity'
+                        value={formData.quantity}
                         id="outlined-required"
                         label="Quantity"
+                        onChange={(e)=> handleChange(e)}
                         type='number'
                         defaultValue={0}
                         helperText='Please enter the type of product'
@@ -56,7 +76,9 @@ const AddProduct = () => {
                     <TextField
                         required
                         color='secondary'
-                        onChange={(e)=> console.log(e.target.value)}
+                        name='unitPrice'
+                        value={formData.unitPrice}
+                        onChange={(e)=> handleChange(e)}
                         id="outlined-required"
                         label="Unit Price"
                         type='number'
@@ -66,7 +88,10 @@ const AddProduct = () => {
                     <TextField
                         id="outlined-select-currency"
                         select
+                        name='type'
                         color='secondary'
+                        value={formData.type}
+                        onChange={(e)=> handleChange(e)}
                         label="Select"
                         helperText="Please select your currency"
 
@@ -76,7 +101,7 @@ const AddProduct = () => {
                         <MenuItem value='Equipment'>Equipment</MenuItem>
                         <MenuItem value='other'>Other</MenuItem>
                     </TextField>
-                    <Button variant='contained' color='secondary' endIcon={<SaveIcon />}>Save</Button>
+                    <Button onClick={handleSave} variant='contained' color='secondary' endIcon={<SaveIcon />}>Save</Button>
                 </Box>
             </Modal>
             <Button color='primary' variant='outlined' onClick={ ()=> setOpen(!open)}>Add</Button>
@@ -84,5 +109,9 @@ const AddProduct = () => {
         </>
     );
 };
-
-export default AddProduct;
+const mapDispatchToProps = (dispatch) => {
+    return {
+        addProduct: (item) => dispatch(addToProducts(item))
+    }
+}
+export default connect(null,mapDispatchToProps)(AddProduct);
