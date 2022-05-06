@@ -1,14 +1,15 @@
 import './App.css';
-import { Container, Box, Typography, Button } from "@mui/material";
-
+import {Container, ThemeProvider, CssBaseline} from "@mui/material";
+import mainTheme from './themes/main';
+console.log(mainTheme);
 function App() {
   return (
-      <Container maxWidth="sm">
-        <Box sx={{ my: 4 }}>
-          <Button>Hello</Button>
-          <Typography>Test</Typography>
-        </Box>
-      </Container>
+      <ThemeProvider theme={mainTheme}>
+          <CssBaseline />
+          <Container maxWidth="sm" >
+
+          </Container>
+      </ThemeProvider>
   );
 }
 
