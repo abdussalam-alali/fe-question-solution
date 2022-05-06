@@ -1,9 +1,12 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Product from './product/Product';
 
 import { connect } from 'react-redux';
-import { List } from "@mui/material";
+import {List, Dialog, Button, Slide, DialogContent} from "@mui/material";
 import Header from "./Header";
+import AddProduct from "./product/AddProduct";
+
+
 const Products = ({products}) => {
     return (
         <>
@@ -11,6 +14,7 @@ const Products = ({products}) => {
             <List color='primary'>
                 { products.map(item=> <Product item={item} key={item.product}/>) }
             </List>
+            <AddProduct />
         </>
     );
 }
