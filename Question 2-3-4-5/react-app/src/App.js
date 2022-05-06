@@ -1,12 +1,23 @@
 import './App.css';
-import {Container, ThemeProvider, CssBaseline} from "@mui/material";
+import {Container, ThemeProvider, CssBaseline, Toolbar} from "@mui/material";
 import mainTheme from './themes/main';
-console.log(mainTheme);
+import ResponsiveAppBar from "./components/layout/Navigation";
+import ContentBox from "./components/layout/ContentBox";
+import { BrowserRouter as Router } from 'react-router-dom';
+
+import AppRoutes from './routes/index.js';
 function App() {
   return (
       <ThemeProvider theme={mainTheme}>
+          <ResponsiveAppBar />
+          <Toolbar />
           <CssBaseline />
-          <Container maxWidth="sm" >
+          <Container maxWidth="md" >
+              <Router>
+                  <ContentBox>
+                        <AppRoutes />
+                </ContentBox>
+              </Router>
 
           </Container>
       </ThemeProvider>
