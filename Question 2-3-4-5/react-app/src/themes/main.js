@@ -15,6 +15,11 @@ const theme = createTheme({
            light: '#FFC5F6',
            main: '#FFC5F6',
            dark: '#FF9FB1',
+       },
+       warning: {
+           light: '#ff0000',
+           main: '#ff0000',
+           dark: '#ff0000',
        }
    },
 });

@@ -7,10 +7,10 @@ import Typography from '@mui/material/Typography';
 import Menu from '@mui/material/Menu';
 import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
-import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
+import { Link } from 'react-router-dom';
 
-const pages = ['Q2-Q4','Q5'];
+const pages = [{name:'Q2-Q4',link:'/'},{name: 'Q5',link:'/q5'}];
 
 const ResponsiveAppBar = () => {
     const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -65,9 +65,14 @@ const ResponsiveAppBar = () => {
                             }}
                         >
                             {pages.map((page) => (
-                                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                                    <Typography textAlign="center">{page}</Typography>
-                                </MenuItem>
+                                <Link to={page.link} style={{textDecoration: 'none'}}>
+                                    <MenuItem key={page.name}>
+                                        <Typography color='primary'>
+                                            {page.name}
+                                        </Typography>
+                                    </MenuItem>
+                                </Link>
+
                             ))}
                         </Menu>
                     </Box>
@@ -80,14 +85,14 @@ const ResponsiveAppBar = () => {
                         Product cart
                     </Typography>
                     <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-                        {pages.map((page) => (
-                            <Button
-                                key={page}
-                                onClick={handleCloseNavMenu}
-                                sx={{ my: 2, color: 'white', display: 'block' }}
-                            >
-                                {page}
-                            </Button>
+                        { pages.map((page) => (
+                            <MenuItem key={page.name}>
+                                <Link to={page.link} style={{color:'#fff',textDecoration: 'none'}}>
+                                    <Typography>
+                                        {page.name}
+                                    </Typography>
+                                </Link>
+                            </MenuItem>
                         ))}
                     </Box>
                 </Toolbar>

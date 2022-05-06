@@ -9,17 +9,18 @@ import AppRoutes from './routes/index.js';
 function App() {
   return (
       <ThemeProvider theme={mainTheme}>
+      <Router>
           <ResponsiveAppBar />
           <Toolbar />
           <CssBaseline />
           <Container maxWidth="md" >
-              <Router>
                   <ContentBox>
                         <AppRoutes />
                 </ContentBox>
-              </Router>
           </Container>
-      </ThemeProvider>
+      </Router>
+
+</ThemeProvider>
   );
 }
 
