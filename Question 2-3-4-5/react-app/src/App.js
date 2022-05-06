@@ -18,7 +18,6 @@ function App() {
                         <AppRoutes />
                 </ContentBox>
               </Router>
-
           </Container>
       </ThemeProvider>
   );
